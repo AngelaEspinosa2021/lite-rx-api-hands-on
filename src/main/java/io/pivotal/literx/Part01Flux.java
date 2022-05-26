@@ -36,7 +36,13 @@ public class Part01Flux {
 
 	// TODO Create a Flux from a List that contains 2 values "foo" and "bar"
 	Flux<String> fooBarFluxFromList() {
-		return null;
+		List<String> listString = new ArrayList<>();
+		listString.add("foo");
+		listString.add("bar");
+
+		Flux<String> flux = Flux.fromIterable(listString);
+		flux.collectList().subscribe(lista -> lista.toString());
+		return flux;
 	}
 
 //========================================================================================
