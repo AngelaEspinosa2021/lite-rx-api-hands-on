@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 import io.pivotal.literx.domain.User;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 /**
@@ -45,7 +46,10 @@ public class Part03StepVerifier {
 
 	// TODO Use StepVerifier to check that the flux parameter emits "foo" and "bar" elements then a RuntimeException error.
 	void expectFooBarError(Flux<String> flux) {
-		fail();
+		Flux<String> prueba = test.fooBarFluxFromValues();
+		StepVerifier.create(prueba).expectNext("foo").expectNext("bar").expectError(RuntimeException.class);
+
+		//fail();
 	}
 
 //========================================================================================
