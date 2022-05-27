@@ -20,7 +20,6 @@ public class Part04Transform {
 	Mono<User> capitalizeOne(Mono<User> mono) {
 		return Mono.just(new User(User.SKYLER.getUsername().toUpperCase(), User.SKYLER.getFirstname().toUpperCase(), User.SKYLER.getLastname().toUpperCase()));
 
-
 		/*Mono.just(user).
 
 				.map(item -> {
@@ -37,7 +36,13 @@ public class Part04Transform {
 
 	// TODO Capitalize the users username, firstName and lastName
 	Flux<User> capitalizeMany(Flux<User> flux) {
-		return null;
+		List<User> usuarios = new ArrayList<>();
+		usuarios.add(new User(User.SKYLER.getUsername().toUpperCase(), User.SKYLER.getFirstname().toUpperCase(), User.SKYLER.getLastname().toUpperCase()));
+		usuarios.add(new User(User.JESSE.getUsername().toUpperCase(), User.JESSE.getFirstname().toUpperCase(), User.JESSE.getLastname().toUpperCase()));
+		usuarios.add(new User(User.WALTER.getUsername().toUpperCase(), User.WALTER.getFirstname().toUpperCase(), User.WALTER.getLastname().toUpperCase()));
+		usuarios.add(new User(User.SAUL.getUsername().toUpperCase(), User.SAUL.getFirstname().toUpperCase(), User.SAUL.getLastname().toUpperCase()));
+
+		return Flux.fromIterable(usuarios);
 	}
 
 //========================================================================================
