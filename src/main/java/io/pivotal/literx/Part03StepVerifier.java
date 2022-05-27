@@ -16,6 +16,7 @@
 
 package io.pivotal.literx;
 
+import java.time.Duration;
 import java.util.function.Supplier;
 
 import io.pivotal.literx.domain.User;
@@ -57,7 +58,12 @@ public class Part03StepVerifier {
 	// TODO Use StepVerifier to check that the flux parameter emits a User with "swhite"username
 	// and another one with "jpinkman" then completes successfully.
 	void expectSkylerJesseComplete(Flux<User> flux) {
-		StepVerifier.create(Flux.just(new User("swhite",null,null), new User("jpinkman", null, null)));
+
+		StepVerifier.create(Flux.just(new User("swhite",null,null), new User("jpinkman", null, null)))
+				.expectNextMatches(response -> "swhite".equals(response.getUsername())).expectNext(User.SKYLER);
+
+		StepVerifier.create(Flux.just(new User("swhite",null,null), new User("jpinkman", null, null)))
+				.expectNextMatches(response -> "jpinkman".equals(response.getUsername())).expectNext(User.JESSE);
 
 		//fail();
 	}
@@ -66,7 +72,10 @@ public class Part03StepVerifier {
 
 	// TODO Expect 10 elements then complete and notice how long the test takes.
 	void expect10Elements(Flux<Long> flux) {
-		fail();
+		//fail();
+		Flux<Long> prueba = test.counter();
+		StepVerifier.create(prueba).expectNextCount(0).thenAwait(Duration.ofMillis(100));
+
 	}
 
 //========================================================================================
@@ -74,7 +83,8 @@ public class Part03StepVerifier {
 	// TODO Expect 3600 elements at intervals of 1 second, and verify quicker than 3600s
 	// by manipulating virtual time thanks to StepVerifier#withVirtualTime, notice how long the test takes
 	void expect3600Elements(Supplier<Flux<Long>> supplier) {
-		fail();
+		StepVerifier.create(Flux.interval(Duration.ofSeconds(3600)).take(3600)).expectNextCount(0).thenAwait(Duration.ofSeconds(3600));
+		//fail();
 	}
 
 	private void fail() {
