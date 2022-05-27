@@ -49,7 +49,13 @@ public class Part04Transform {
 
 	// TODO Capitalize the users username, firstName and lastName using #asyncCapitalizeUser
 	Flux<User> asyncCapitalizeMany(Flux<User> flux) {
-		return null;
+		List<User> usuarios = new ArrayList<>();
+		usuarios.add(new User(User.SKYLER.getUsername(), User.SKYLER.getFirstname(), User.SKYLER.getLastname()));
+		usuarios.add(new User(User.JESSE.getUsername(), User.JESSE.getFirstname(), User.JESSE.getLastname()));
+		usuarios.add(new User(User.WALTER.getUsername(), User.WALTER.getFirstname(), User.WALTER.getLastname()));
+		usuarios.add(new User(User.SAUL.getUsername(), User.SAUL.getFirstname(), User.SAUL.getLastname()));
+
+		return Flux.fromIterable(usuarios).flatMap(this::asyncCapitalizeUser);
 	}
 
 	Mono<User> asyncCapitalizeUser(User u) {
