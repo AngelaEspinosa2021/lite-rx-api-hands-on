@@ -14,7 +14,7 @@ public class Part02Mono {
 
 	// TODO Return an empty Mono
 	Mono<String> emptyMono() {
-		return null;
+		return Mono.empty();
 	}
 
 //========================================================================================
