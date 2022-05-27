@@ -4,6 +4,9 @@ import io.pivotal.literx.domain.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Learn how to transform values.
  *
@@ -15,7 +18,19 @@ public class Part04Transform {
 
 	// TODO Capitalize the user username, firstname and lastname
 	Mono<User> capitalizeOne(Mono<User> mono) {
-		return null;
+		return Mono.just(new User(User.SKYLER.getUsername().toUpperCase(), User.SKYLER.getFirstname().toUpperCase(), User.SKYLER.getLastname().toUpperCase()));
+
+
+		/*Mono.just(user).
+
+				.map(item -> {
+			item.getUsername().toUpperCase();
+			item.getFirstname().toUpperCase();
+			item.getLastname().toUpperCase();
+			return item;
+		}).subscribe(p ->p.toString());
+		return Mono.just(user).map(
+		});*/
 	}
 
 //========================================================================================
