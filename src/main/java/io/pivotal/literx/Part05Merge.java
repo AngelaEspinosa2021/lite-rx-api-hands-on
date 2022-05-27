@@ -4,6 +4,9 @@ import io.pivotal.literx.domain.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Learn how to merge flux.
  *
@@ -11,18 +14,21 @@ import reactor.core.publisher.Mono;
  */
 public class Part05Merge {
 
+
+
 //========================================================================================
 
 	// TODO Merge flux1 and flux2 values with interleave
 	Flux<User> mergeFluxWithInterleave(Flux<User> flux1, Flux<User> flux2) {
-		return null;
+		return Flux.merge(flux1.mergeWith(flux2));
 	}
 
 //========================================================================================
 
 	// TODO Merge flux1 and flux2 values with no interleave (flux1 values and then flux2 values)
 	Flux<User> mergeFluxWithNoInterleave(Flux<User> flux1, Flux<User> flux2) {
-		return null;
+
+		return Flux.merge(flux1.concatWith(flux2));
 	}
 
 //========================================================================================
